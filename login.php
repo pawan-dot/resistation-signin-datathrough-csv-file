@@ -44,7 +44,7 @@
                         <p>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="Password" require>
+                            minlength="6"  placeholder="Password" require>
                         </div>
                         </p>
                         <p>

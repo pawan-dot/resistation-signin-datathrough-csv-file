@@ -4,9 +4,9 @@ if(isset($_POST['submit'])){
     // echo '<pre>';
     // print_r($_FILES);
 
-	$file=$_FILES['doc']['tmp_name'];
+	$file=$_FILES['file']['tmp_name'];
 	
-	$ext=pathinfo($_FILES['doc']['name'],PATHINFO_EXTENSION);
+	$ext=pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION);
 	if($ext=='xlsx'){
 		require('PHPExcel/PHPExcel.php');
 		require('PHPExcel/PHPExcel/IOFactory.php');
@@ -21,7 +21,8 @@ if(isset($_POST['submit'])){
 			for($i=0;$i<=$getHighestRow;$i++){
 
 				$name=$sheet->getCellByColumnAndRow(0,$i)->getValue();
-				$email=$sheet->getCellByColumnAndRow(1,$i)->getValue();
+				$allmail=$email=$sheet->getCellByColumnAndRow(1,$i)->getValue();
+        $count=0;
 				if($name!=''){
                     //random pass
                     $str="sadfghjxvcnm!@&^%$#*&$";
@@ -50,13 +51,32 @@ if(isset($_POST['submit'])){
           
            $insertquery="INSERT INTO `my_users`(`full_name`, `email`, `password`, `created_by`, `is_admine`, `created_on`) VALUES ('$name', '$email', '$str','$id', 'false', '$date')";
            $run=mysqli_query($con,$insertquery);
+          // $ount=mysqli_num_rows($run);
+           
+
+           //SEND MAIL TO ALL EMAIL MENTIONED IN SHEAT
+            if($allmail!=''){
+
+                $subject="Account creatoin";
+                $body=" your new account is created";
+       
+                $sender_email="from:pk02.verma@gmail.com";
+       
+                if(mail($allmail,$subject,$body,$sender_email)){
+                  //echo "email sent $to_email..";
+                   header('location:welcome.php');
+       
+                }else{
+                  "email sending failed to User...";
+                }
+            }
           
           ?>
           <script>
            alert('Data inserted successfully through admin ID =<?php echo $id?>');
           </script>
           <?php 
-			}
+        }
     }
   }
 	}else{
@@ -85,7 +105,7 @@ if(isset($_POST['submit'])){
     
     <div class="form-group mx-sm-3 mb-2">
     
-      <input type="file" class="form-control" name="doc" placeholder="Upload file">
+      <input type="file" class="form-control" name="file" placeholder="Upload file">
      </div>
 
        <button type="submit" name="submit" class="btn btn-primary mb-2 ">submit</button>

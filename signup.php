@@ -25,27 +25,27 @@
             <h1>Sign Up</h1>
             <p>
             <div class="form-group">
-              <input type="name" name="name" class="form-control" id="exampleInputPassword1" min="2" placeholder="Full Name" require>
+              <input type="name" name="name" class="form-control" id="exampleInputPassword1" minlength="2" placeholder="Full Name" Required>
             </div>
             </p>
 
              <p>
             <div class="form-group">
               <input type="email"name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email" require>
+                placeholder="Enter email" Required>
             </div>
             </p>
 
             <p>
             <div class="form-group">
-              <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Password ( 6 or more charector)" require>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" minlength="6"
+                placeholder="Password ( 6 or more charector)" required>
             </div>
             </p>
             <p>
             <div class="form-group"> 
-              <input type="password" name="cpassword" class="form-control" id="exampleInputPassword1"
-                placeholder="Confirm Password" require>
+              <input type="password" name="cpassword" class="form-control" id="exampleInputPassword1" minlength="6"
+                placeholder="Confirm Password" required>
             </div>
             </p>
             
